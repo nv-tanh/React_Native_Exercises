@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guessing Game in HTML</title>
+</head>
+<body>
+<div id="message">This container will display the notification of the game</div>
+<div id="result"></div>
+<div id="pastGuess"></div>
+<input id="number" type="text" maxlength="2" pattern="[-+]?[0-9]"/>
+<button id="guessButton">Guess</button>
+
+</body>
+
+</html>
+
+<script>
+    let button = document.getElementById('guessButton');
+    let secretNumber = Math.round(Math.random() * 100);
+    let pastGuesses = "";
+    let limit = 10;
+
+    button.addEventListener('click', function () {
+        if (limit > -1) {
+            let guessNumber = document.getElementById("number").value;
+            if (guessNumber > secretNumber) {
+                document.getElementById('result').innerHTML = "Sorry your guess is too HIGH, you have " + --limit + " guess left";
+                document.getElementById('pastGuess').innerHTML = pastGuesses += guessNumber + "&nbsp";
+                document.getElementById('result').style.backgroundColor = "orange";
+            } else if (guessNumber < secretNumber) {
+                document.getElementById('result').innerHTML = "Sorry your guess is too LOW, you have " + --limit + " guess left";
+                document.getElementById('pastGuess').innerHTML = pastGuesses += guessNumber + "&nbsp";
+                document.getElementById('result').style.backgroundColor = "red";
+            } else {
+                document.getElementById('result').innerHTML = "Congratulations!! You guessed correctly.".toUpperCase();
+                document.getElementById('result').style.backgroundColor = "GREEN";
+                document.getElementById('pastGuess').innerHTML = "secret number is " + secretNumber;
+            }
+            document.getElementById('number').value = "";
+        } else {
+            document.getElementById('result').innerHTML = "YOU LOSE";
+            document.getElementById('pastGuess').innerHTML = "";
+        }
+    })
+
+
+</script>
